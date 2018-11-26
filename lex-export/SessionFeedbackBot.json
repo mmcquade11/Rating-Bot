@@ -1,0 +1,564 @@
+{
+    "metadata": {
+      "schemaVersion": "1.0",
+      "importType": "LEX",
+      "importFormat": "JSON"
+    },
+    "resource": {
+      "name": "SessionFeedbackBot",
+      "version": "32",
+      "intents": [
+        {
+          "name": "Thanks",
+          "version": "4",
+          "fulfillmentActivity": {
+            "type": "CodeHook",
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+              "messageVersion": "1.0"
+            }
+          },
+          "sampleUtterances": [
+            "thanks",
+            "thank you",
+            "that's great",
+            "thank you so much",
+            "thanks so much",
+            "thank you very much",
+            "cheers",
+            "nice"
+          ],
+          "slots": []
+        },
+        {
+          "rejectionStatement": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "Okay, maybe next time."
+              }
+            ]
+          },
+          "name": "ProvideFeedback",
+          "version": "15",
+          "fulfillmentActivity": {
+            "type": "CodeHook",
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+              "messageVersion": "1.0"
+            }
+          },
+          "sampleUtterances": [
+            "leave feedback",
+            "leave feedback on a session",
+            "provide feedback",
+            "give feedback",
+            "make comments",
+            "leave a comment on a session",
+            "provide comments",
+            "leave a comment",
+            "make a comment",
+            "leave some feedback",
+            "i would like to give some feedback on a talk"
+          ],
+          "slots": [
+            {
+              "name": "SessionComments",
+              "slotConstraint": "Required",
+              "slotType": "SessionFeedback",
+              "slotTypeVersion": "1",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Please provide your feedback now."
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 4,
+              "sampleUtterances": []
+            },
+            {
+              "name": "SessionDate",
+              "slotConstraint": "Required",
+              "slotType": "AMAZON.DATE",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "What date was the session on?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "sampleUtterances": []
+            },
+            {
+              "name": "SessionID",
+              "slotConstraint": "Required",
+              "slotType": "SessionID",
+              "slotTypeVersion": "2",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which session do you want to leave feedback on?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "sampleUtterances": []
+            },
+            {
+              "name": "SessionLocation",
+              "slotConstraint": "Required",
+              "slotType": "AMAZON.EUROPE_CITY",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which city did this session take place in?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "sampleUtterances": []
+            }
+          ],
+          "confirmationPrompt": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "Are you sure you want to submit this feedback?"
+              }
+            ],
+            "maxAttempts": 3
+          },
+          "dialogCodeHook": {
+            "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+            "messageVersion": "1.0"
+          }
+        },
+        {
+          "name": "CancelRequest",
+          "version": "8",
+          "fulfillmentActivity": {
+            "type": "CodeHook",
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+              "messageVersion": "1.0"
+            }
+          },
+          "sampleUtterances": [
+            "cancel",
+            "end",
+            "bye bye",
+            "exit",
+            "bye",
+            "it doesn't matter",
+            "good bye",
+            "goodbye"
+          ],
+          "slots": []
+        },
+        {
+          "rejectionStatement": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "Okay. Maybe next time?"
+              }
+            ]
+          },
+          "name": "RateSession",
+          "version": "20",
+          "fulfillmentActivity": {
+            "type": "CodeHook",
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+              "messageVersion": "1.0"
+            }
+          },
+          "sampleUtterances": [
+            "I would like to score a session",
+            "I would like to rate a session",
+            "Rate session",
+            "Score session",
+            "Give a session a score",
+            "Give a session a rating",
+            "Provide a rating",
+            "Provide a score",
+            "rate",
+            "score",
+            "i would like to rate a talk",
+            "i'd like to leave a rating"
+          ],
+          "slots": [
+            {
+              "name": "SessionDate",
+              "slotConstraint": "Required",
+              "slotType": "AMAZON.DATE",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "What date was the session on?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "sampleUtterances": []
+            },
+            {
+              "name": "SessionID",
+              "slotConstraint": "Required",
+              "slotType": "SessionID",
+              "slotTypeVersion": "2",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which session do you want to rate?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "sampleUtterances": []
+            },
+            {
+              "name": "SessionLocation",
+              "slotConstraint": "Required",
+              "slotType": "AMAZON.EUROPE_CITY",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Where did this event take place?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "sampleUtterances": []
+            },
+            {
+              "name": "SessionScore",
+              "slotConstraint": "Required",
+              "slotType": "AMAZON.NUMBER",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "How would you rate this session, between one and five, with five being the best??"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 4,
+              "sampleUtterances": []
+            }
+          ],
+          "confirmationPrompt": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "Are you sure you want to submit this rating?"
+              }
+            ],
+            "maxAttempts": 3
+          },
+          "dialogCodeHook": {
+            "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+            "messageVersion": "1.0"
+          }
+        },
+        {
+          "name": "HelpMe",
+          "version": "15",
+          "fulfillmentActivity": {
+            "type": "ReturnIntent"
+          },
+          "sampleUtterances": [
+            "Help",
+            "Help Me",
+            "I need help",
+            "how do I use this",
+            "What does this do",
+            "Hello",
+            "i love you",
+            "Hola",
+            "Yo",
+            "Hey",
+            "Hi",
+            "What can you do",
+            "Hey up",
+            "Hellllooooooo",
+            "Come on "
+          ],
+          "slots": [],
+          "conclusionStatement": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "Hi there! Right now I can rate or take feedback on sessions or events where you've seen Ian speak. Just say 'I want to rate a session' or 'I want to leave feedback'. I need to know the date, time, location and the session title. If you want to know more about how I work, ask for GitHub details and check out the code, or ask for Ian's email and drop him an email."
+              }
+            ]
+          }
+        },
+        {
+          "name": "TwitterInfo",
+          "version": "2",
+          "fulfillmentActivity": {
+            "type": "ReturnIntent"
+          },
+          "sampleUtterances": [
+            "Twitter",
+            "What's your Twitter account",
+            "Where can I find you on Twitter",
+            "Are you on Twitter",
+            "Give me your Twitter details",
+            "What's your Twitter",
+            "I want to follow you on Twitter",
+            "what about twitter"
+          ],
+          "slots": [],
+          "conclusionStatement": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "Sure. I'm on Twitter at https://twitter.com/IanMmmm. Follow me there."
+              },
+              {
+                "contentType": "PlainText",
+                "content": "You can find me on Twitter at https://twitter.com/IanMmmm. Don't forget to click follow :)"
+              }
+            ]
+          }
+        },
+        {
+          "name": "EmailInfo",
+          "version": "1",
+          "fulfillmentActivity": {
+            "type": "ReturnIntent"
+          },
+          "sampleUtterances": [
+            "what's your email",
+            "can i email you",
+            "what's your email address",
+            "email",
+            "email address",
+            "how can i email you",
+            "what's your email again",
+            "tell me you email"
+          ],
+          "slots": [],
+          "conclusionStatement": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "You can reach me via email at ianm@amazon.com"
+              },
+              {
+                "contentType": "PlainText",
+                "content": "My email address is ianm@amazon.com"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Testing",
+          "version": "6",
+          "fulfillmentActivity": {
+            "type": "CodeHook",
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+              "messageVersion": "1.0"
+            }
+          },
+          "sampleUtterances": [
+            "Testing testing testing",
+            "Test",
+            "Testing",
+            "Test test",
+            "Test test test"
+          ],
+          "slots": [
+            {
+              "name": "TestTarget",
+              "slotConstraint": "Required",
+              "slotType": "OpenTestTarget",
+              "slotTypeVersion": "1",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which feature to test?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "sampleUtterances": []
+            }
+          ],
+          "dialogCodeHook": {
+            "uri": "arn:aws:lambda:us-east-1:554625704737:function:awscodestar-rating-bot-lamb-RatingBotLambdaHandler-FTBHSA7D0BG8",
+            "messageVersion": "1.0"
+          }
+        },
+        {
+          "name": "GithubInfo",
+          "version": "3",
+          "fulfillmentActivity": {
+            "type": "ReturnIntent"
+          },
+          "sampleUtterances": [
+            "what's your github",
+            "give me your github details",
+            "can i have your github details",
+            "what's your github address",
+            "github",
+            "what about github",
+            "are you on github",
+            "where can i get the code for this demo",
+            "can i get the code for this demo"
+          ],
+          "slots": [],
+          "conclusionStatement": {
+            "messages": [
+              {
+                "contentType": "PlainText",
+                "content": "You can find my Github account at https://github.com/ianmas-aws"
+              },
+              {
+                "contentType": "PlainText",
+                "content": "My Github account is at https://github.com/ianmas-aws"
+              },
+              {
+                "contentType": "PlainText",
+                "content": "You can find me on Github at https://github.com/ianmas-aws"
+              }
+            ]
+          }
+        }
+      ],
+      "slotTypes": [
+        {
+          "description": "Free form text feedback",
+          "name": "SessionFeedback",
+          "version": "1",
+          "enumerationValues": [
+            {
+              "value": "I didn't like it",
+              "synonyms": []
+            },
+            {
+              "value": "Lots of great details",
+              "synonyms": []
+            },
+            {
+              "value": "You spoke too fast ",
+              "synonyms": []
+            },
+            {
+              "value": "Should have included a demo",
+              "synonyms": []
+            },
+            {
+              "value": "This was really good",
+              "synonyms": []
+            }
+          ],
+          "valueSelectionStrategy": "ORIGINAL_VALUE"
+        },
+        {
+          "name": "OpenTestTarget",
+          "version": "1",
+          "enumerationValues": [
+            {
+              "value": "A",
+              "synonyms": []
+            },
+            {
+              "value": "B",
+              "synonyms": []
+            },
+            {
+              "value": "C",
+              "synonyms": []
+            },
+            {
+              "value": "D",
+              "synonyms": []
+            },
+            {
+              "value": "E",
+              "synonyms": []
+            }
+          ],
+          "valueSelectionStrategy": "ORIGINAL_VALUE"
+        },
+        {
+          "description": "ID for the Session that we are collecting data about",
+          "name": "SessionID",
+          "version": "2",
+          "enumerationValues": [
+            {
+              "value": "An Introduction to Amazon Lex"
+            },
+            {
+              "value": "Getting started with AWS Lambda"
+            },
+            {
+              "value": "Amazon Lex Session"
+            },
+            {
+              "value": "DEV405"
+            },
+            {
+              "value": "ABC123"
+            },
+            {
+              "value": "Chatbots Session"
+            },
+            {
+              "value": "Building Chatbots with Amazon Lex"
+            },
+            {
+              "value": "Getting started with Amazon Lex"
+            },
+            {
+              "value": "AI123"
+            }
+          ]
+        }
+      ],
+      "voiceId": "Ivy",
+      "childDirected": false,
+      "locale": "en-US",
+      "idleSessionTTLInSeconds": 300,
+      "clarificationPrompt": {
+        "messages": [
+          {
+            "contentType": "PlainText",
+            "content": "Sorry, I don't understand. Try asking for help for details of what I can help with."
+          }
+        ],
+        "maxAttempts": 5
+      },
+      "abortStatement": {
+        "messages": [
+          {
+            "contentType": "PlainText",
+            "content": "Sorry, I couldn't understand what you wanted. Goodbye."
+          }
+        ]
+      }
+    }
+  }
