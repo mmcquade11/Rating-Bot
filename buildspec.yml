@@ -5,7 +5,8 @@ phases:
     commands:
 
       # Upgrade AWS CLI to the latest version
-      - pip install --upgrade awscli
+      - pip3 install --upgrade awscli
+      - pip3 install -r requirements.txt -t .
 
   pre_build:
     commands:
